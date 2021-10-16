@@ -1,0 +1,22 @@
+{
+  "name": "qa_task_10c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rzegnam/qa_task_10c.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rzegnam/qa_task_10c/issues"
+  },
+  "homepage": "https://github.com/rzegnam/qa_task_10c#readme",
+  "devDependencies": {
+    "cypress": "^8.6.0"
+  }
+}
