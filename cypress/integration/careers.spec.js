@@ -1,35 +1,27 @@
+import * as baseLocators from "../locators/base_locators";
+import * as careersLocators from "../locators/careers_page_locators";
+
 describe("Careers page", () => {
-  it("should check that there is only one qa role opened", () => {
-    // Open 10C home page ('https://10clouds.com/')
+  const automationText = "Automation";
+
+  beforeEach(() => {
     cy.visit("/");
-    // assertion
-    // Open Careers tab
-    cy.get(":nth-child(8) > .Link__NavLink-sc-1ryxvh0-1 > span").click();
-    // assertion
-    // Validate that there is __exactly__ 1 'QA Automation Engineer' role open
-    cy.get('[href="/careers/qa-automation-engineer-poland/"]').should(
-      "have.length",
-      1
-    );
+    baseLocators.titleHeader().should("have.class", "title").and("be.visible");
+    baseLocators.careersTab().click();
+    cy.url().should("contain", "careers");
   });
 
-  it.only("should check that there is only one qa role opened", () => {
-    // make this custom command or something
-    // create selectors/locators folder
-    // Open 10C home page('https://10clouds.com/')
-    cy.visit("/");
-    // assertion
-    // Open Careers tab
-    cy.get(":nth-child(8) > .Link__NavLink-sc-1ryxvh0-1 > span").click();
-    // assertion
-    // Type 'Automation' in Search jobs input
-    cy.get("#search-job").type("Automation");
-    // Validate that each result contains "Automation" in title
-    cy.get(".job-offers__wrapper")
+  it("should check that there is only one qa role opened", () => {
+    careersLocators.qaOffer().should("have.length", 1);
+  });
+
+  it("should check that searching for 'Automation' results are displayed", () => {
+    careersLocators.searchInput().type(automationText);
+    careersLocators
+      .jobOffers()
       .children()
-      .each(($result) => {
-        const text = $result.text();
-        expect(text).to.include("Automation");
+      .each(($offer) => {
+        expect($offer).to.contain(automationText);
       });
   });
 });
